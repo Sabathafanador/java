@@ -1,3 +1,36 @@
 .hola{
   color: rgb(255, 0, 0);  
 }
+
+
+/* Estilos para el menú hamburguesa */
+#menu-toggle {
+  display: none;
+}
+
+#menu-toggle:checked + #menu {
+  display: block;
+}
+
+#menu {
+  display: none;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+  /* Estilos para el carrusel de imágenes */
+}
+
+/* Estilos para el contenido */
+.content {
+  /* Estilos para el contenido principal */
+}
+
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Otros estilos... */

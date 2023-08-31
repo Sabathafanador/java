@@ -1,52 +1,66 @@
+let saldo = 1000; // Saldo inicial en la cuenta del cliente
 
+function mostrarMenu() {
+    alert("¡Bienvenido a la tienda de ropa!\n" +
+        "Tu saldo actual es: $" + saldo.toFixed(2) +
+        "\nOpciones:\n" +
+        "1. Ver productos\n" +
+        "2. Comprar producto\n" +
+        "3. Salir");
+}
 
-<script>
-    // Crear un array de objetos con información de productos
-    let productos = [
-        { id: 1, nombre: "Camiseta", precio: 20 },
-        { id: 2, nombre: "Pantalón", precio: 40 } ,
-        { id: 3, nombre: "Zapatos", precio: 60 } ,
-        { id: 4, nombre: "Sombrero", precio: 15 } ,
-        { id: 5, nombre: "Bufanda", precio: 10 } ,
-    ];
+function verProductos() {
+    alert("Productos disponibles:\n" +
+        "1. Camiseta - $20.00\n" +
+        "2. Pantalón - $40.00\n" +
+        "3. Zapatos - $60.00");
+}
 
-    // Función para mostrar la información de los productos
-    function mostrarProductos(array) {
-        console.log("Información de productos:");
-        array.forEach(function(producto) {
-            console.log("ID:", producto.id, "- Nombre:", producto.nombre, "- Precio:", producto.precio);
-        });
-    }
-
-    // Pedir un precio máximo y mostrar los productos por debajo de ese precio
-    let precioMaximo = parseFloat(prompt("Ingresa un precio máximo para filtrar los productos:"));
-    let productosFiltrados = productos.filter(function(producto) {
-        return producto.precio <= precioMaximo;
-    });
-
-    // Mostrar los productos filtrados
-    if (productosFiltrados.length > 0) {
-        mostrarProductos(productosFiltrados);
+function comprarProducto(producto, precio) {
+    if (saldo >= precio) {
+        saldo -= precio;
+        alert("¡Compra exitosa!\nHas comprado un " + producto + ".\nSaldo restante: $" + saldo.toFixed(2));
     } else {
-        console.log("No se encontraron productos por debajo de ese precio.");
+        alert("Saldo insuficiente para comprar este producto.");
     }
+}
 
-    // Función de orden superior para buscar un producto por nombre
-    function buscarProductoPorNombre(array, nombre) {
-        return array.find(function(producto) {
-            return producto.nombre.toLowerCase() === nombre.toLowerCase();
-        });
+function tiendaRopa() {
+    alert("¡Bienvenido a la tienda de ropa!");
+
+    while (true) {
+        mostrarMenu();
+        let opcion = parseInt(prompt("Selecciona una opción:"));
+
+        switch (opcion) {
+            case 1:
+                verProductos();
+                break;
+            case 2:
+                let producto = prompt("¿Qué producto deseas comprar? (Camiseta/Pantalón/Zapatos)").toLowerCase();
+                switch (producto) {
+                    case "camiseta":
+                        comprarProducto("camiseta", 20);
+                        break;
+                    case "pantalón":
+                        comprarProducto("pantalón", 40);
+                        break;
+                    case "zapatos":
+                        comprarProducto("zapatos", 60);
+                        break;
+                    default:
+                        alert("Producto no válido.");
+                }
+                break;
+            case 3:
+                alert("Gracias por visitar la tienda de ropa. ¡Vuelve pronto!");
+                return;
+            default:
+                alert("Opción no válida.");
+        }
     }
+}
 
-    // Pedir un nombre de producto y buscar el producto
-    let nombreBusqueda = prompt("Ingresa un nombre de producto para buscar:");
-    let productoEncontrado = buscarProductoPorNombre(productos, nombreBusqueda);
+tiendaRopa();
 
-    // Mostrar el producto encontrado o un mensaje si no se encontró
-    if (productoEncontrado) {
-        alert("Producto encontrado:\nID: " + productoEncontrado.id + "\nNombre: " + productoEncontrado.nombre + "\nPrecio: $" + productoEncontrado.precio);
-    } else {
-        alert("Producto no encontrado.");
-    }
-</script>
 
