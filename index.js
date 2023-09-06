@@ -1,66 +1,81 @@
-let saldo = 1000; // Saldo inicial en la cuenta del cliente
+document.addEventListener('DOMContentLoaded', () => {
+    const productos = [
+        { id: 1, nombre: 'Producto 1', precio: 19.99 },
+        { id: 2, nombre: 'Producto 2', precio: 29.99 },
+        { id: 3, nombre: 'Producto 3', precio: 9.99 },
+        { id: 4, nombre: 'Producto 4', precio: 39.99 },
+        { id: 5, nombre: 'Producto 5', precio: 14.99 },
+        { id: 6, nombre: 'Producto 6', precio: 24.99 },
+        { id: 7, nombre: 'Producto 7', precio: 49.99 },
+        { id: 8, nombre: 'Producto 8', precio: 7.99 },
+        { id: 9, nombre: 'Producto 9', precio: 29.99 },
+        { id: 10, nombre: 'Producto 10', precio: 34.99 },
+    ];
 
-function mostrarMenu() {
-    alert("¡Bienvenido a la tienda de ropa!\n" +
-        "Tu saldo actual es: $" + saldo.toFixed(2) +
-        "\nOpciones:\n" +
-        "1. Ver productos\n" +
-        "2. Comprar producto\n" +
-        "3. Salir");
-}
+    const carrito = [];
 
-function verProductos() {
-    alert("Productos disponibles:\n" +
-        "1. Camiseta - $20.00\n" +
-        "2. Pantalón - $40.00\n" +
-        "3. Zapatos - $60.00");
-}
+    // Función para mostrar los productos en la página
+    function mostrarProductos() {
+        const productosContainer = document.getElementById('productos');
+        productosContainer.innerHTML = '';
 
-function comprarProducto(producto, precio) {
-    if (saldo >= precio) {
-        saldo -= precio;
-        alert("¡Compra exitosa!\nHas comprado un " + producto + ".\nSaldo restante: $" + saldo.toFixed(2));
-    } else {
-        alert("Saldo insuficiente para comprar este producto.");
+        productos.forEach((producto) => {
+            const productoElement = document.createElement('div');
+            productoElement.className = 'producto';
+            productoElement.innerHTML = `
+                <h3>${producto.nombre}</h3>
+                <p>Precio: $${producto.precio.toFixed(2)}</p>
+                <button data-id="${producto.id}">Agregar al Carrito</button>
+            `;
+
+            productoElement.querySelector('button').addEventListener('click', agregarAlCarrito);
+            productosContainer.appendChild(productoElement);
+        });
     }
-}
 
-function tiendaRopa() {
-    alert("¡Bienvenido a la tienda de ropa!");
+    // Función para agregar un producto al carrito
+    function agregarAlCarrito(event) {
+        const id = parseInt(event.target.getAttribute('data-id'));
+        const producto = productos.find((p) => p.id === id);
 
-    while (true) {
-        mostrarMenu();
-        let opcion = parseInt(prompt("Selecciona una opción:"));
-
-        switch (opcion) {
-            case 1:
-                verProductos();
-                break;
-            case 2:
-                let producto = prompt("¿Qué producto deseas comprar? (Camiseta/Pantalón/Zapatos)").toLowerCase();
-                switch (producto) {
-                    case "camiseta":
-                        comprarProducto("camiseta", 20);
-                        break;
-                    case "pantalón":
-                        comprarProducto("pantalón", 40);
-                        break;
-                    case "zapatos":
-                        comprarProducto("zapatos", 60);
-                        break;
-                    default:
-                        alert("Producto no válido.");
-                }
-                break;
-            case 3:
-                alert("Gracias por visitar la tienda de ropa. ¡Vuelve pronto!");
-                return;
-            default:
-                alert("Opción no válida.");
+        if (producto) {
+            carrito.push(producto);
+            actualizarCarrito();
         }
     }
-}
 
-tiendaRopa();
+    // Función para actualizar la lista de productos en el carrito
+    function actualizarCarrito() {
+        const carritoLista = document.getElementById('carrito-lista');
+        const totalElement = document.getElementById('total');
 
+        carritoLista.innerHTML = '';
+        let total = 0;
 
+        carrito.forEach((producto) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${producto.nombre} - $${producto.precio.toFixed(2)}`;
+            carritoLista.appendChild(listItem);
+            total += producto.precio;
+        });
+
+        totalElement.textContent = total.toFixed(2);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    // Función para vaciar el carrito
+    document.getElementById('vaciar-carrito').addEventListener('click', () => {
+        carrito.length = 0;
+        actualizarCarrito();
+    });
+
+    // Cargar carrito desde localStorage si existe
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+        carrito.push(...JSON.parse(carritoGuardado));
+        actualizarCarrito();
+    }
+
+    // Mostrar productos en la página
+    mostrarProductos();
+});
