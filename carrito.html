@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnoopyShop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    
+    <div class="wrapper">
+        <header class="header-mobile">
+            <h1 class="logo">SnoopyShop</h1>
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+        <aside>
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <header>
+                <h1 class="logo">SnoppyShop</h1>
+            </header>
+            <nav>
+                <ul>
+                    <li>
+                        <a class="boton-menu boton-volver" href="./index.html">
+                            <i class="bi bi-arrow-return-left"></i> Seguir comprando
+                        </a>
+                    </li>
+                    <li>
+                        <a class="boton-menu boton-carrito active" href="./carrito.html">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <footer>
+                <p class="texto-footer">© 2022 SnoopyShop Coder</p>
+            </footer>
+        </aside>
+        <main>
+            <h2 class="titulo-principal">Carrito</h2>
+            <div class="contenedor-carrito">
+                <p id="carrito-vacio" class="carrito-vacio">Tu carrito está vacío. <i class="bi bi-emoji-frown"></i></p>
+
+<div class="carrito-productos disabled" >
+<div class="carrito-producto">
+    <img src="./imagenes/Abrigos/abrigo 1.jpg" alt="uno">
+    <div  class="carrito-producto-titulo" >
+        <small>Titulo</small>
+        <h3>Abrigo 01</h3>
+    </div>
+<div class="carrito-producto-cantidad">
+<small>Cantidad</small>
+<p>1</p>
+</div>
+<div class="carrito-producto-precio">
+    <small>Precio</small>
+    <p>$1000</p>
+</div>
+<div   class="carrito-producto-subtotal">
+    <small>Subtotal</small>
+    <p>$1000</p>
+</div>
+<button class="carrito-producto-eliminar"><i class="bi bi-trash-fill"></i></button>
+ </div>
+
+
+ <div class="carrito-producto">
+    <img src="./imagenes/Abrigos/abrigo2.jpg" alt="dos">
+    <div  class="carrito-producto-titulo" >
+        <small>Titulo</small>
+        <h3>Abrigo 02</h3>
+    </div>
+<div class="carrito-producto-cantidad">
+<small>Cantidad</small>
+<p></p>
+</div>
+<div class="carrito-producto-precio">
+    <small>Precio</small>
+    <p>$2000</p>
+</div>
+<div   class="carrito-producto-subtotal">
+    <small>Subtotal</small>
+    <p>$2000</p>
+</div>
+<button class="carrito-producto-eliminar"><i class="bi bi-trash-fill"></i></button>
+     </div>
+    </div>
+
+<div  class="carrito-acciones disabled" >
+    <div class="acciones-carrito-izquierda">
+        <button class="carrito-acciones-vaciar">vaciar carrito</button>
+    </div>
+
+
+    <div class="acciones-carrito-derecha">
+        <div class="carrito-acciones-total">
+            <p>Total:</p>
+            <p id="total">$3000</p>
+        </div>
+
+<button class="carrito-acciones -comprar">Comprar ahora</button>
+
+    </div>
+    
+</div>
+
+<p class="carrito-comprado disabled">Muchas gracias por tu compra </p>
+
+     </div>
+
+    </main>
+    </div>
+    
+
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/carrito.js"></script>
+    <script src="./js/menu.js"></script>
+</body>
+</html>
